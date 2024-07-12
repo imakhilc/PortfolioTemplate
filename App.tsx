@@ -1,14 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {getPortfolioList} from './src/features/PortfolioListing/network/apiCalls';
 import PortfolioList from './src/features/PortfolioListing/components/PortfolioList';
+import Header from './src/components/Header';
+import {COLORS, STRINGS} from './src/helpers/constants';
 
 function App(): React.JSX.Element {
   const [portfolio, setPortfolio] = useState({});
@@ -21,24 +16,19 @@ function App(): React.JSX.Element {
     initApiCall();
   }, []);
 
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = {
-    flex: 1,
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={COLORS.dark} />
+      <Header title={STRINGS.holdingTitle} />
       <PortfolioList data={portfolio} />
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  body: {},
-});
-
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLORS.dark,
+  },
+});

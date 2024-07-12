@@ -13,3 +13,5 @@ export type PortfolioDataType = {
     userHolding: Array<HoldingItemType>;
   };
 };
+
+export type SizeType = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
