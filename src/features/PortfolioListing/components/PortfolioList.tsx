@@ -4,6 +4,7 @@ import {PortfolioDataType} from '../utils/types';
 import PortfolioItem from './PortfolioItem';
 import {normalize} from '../../../helpers/utils';
 import {COLORS} from '../../../helpers/constants';
+import {getTotalValues} from '../utils/utils';
 
 type PropType = {
   loading: boolean;
@@ -12,7 +13,9 @@ type PropType = {
 };
 
 const PortfolioList: React.FC<PropType> = ({loading, data, initApiCall}) => {
-  const list = data.response?.userHolding;
+  const list = data.response?.userHolding || [];
+  const {totalCurrentValue, totalInvestment, totalPnL, todayPnL} =
+    getTotalValues(list);
   return (
     <View style={styles.container}>
       <FlatList
@@ -21,7 +24,15 @@ const PortfolioList: React.FC<PropType> = ({loading, data, initApiCall}) => {
         onRefresh={initApiCall}
         contentContainerStyle={styles.contentContainerStyle}
         keyExtractor={item => item.symbol}
-        renderItem={({item}) => <PortfolioItem item={item} />}
+        renderItem={({item}) => (
+          <PortfolioItem
+            totalCurrentValue={totalCurrentValue}
+            totalInvestment={totalInvestment}
+            totalPnL={totalPnL}
+            todayPnL={todayPnL}
+            item={item}
+          />
+        )}
         // eslint-disable-next-line react/no-unstable-nested-components
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
@@ -36,7 +47,7 @@ const styles = StyleSheet.create({
   separator: {
     height: normalize(1),
     backgroundColor: COLORS.primaryDark,
-    marginHorizontal: normalize(16)
+    marginHorizontal: normalize(16),
   },
   contentContainerStyle: {
     paddingTop: normalize(16),

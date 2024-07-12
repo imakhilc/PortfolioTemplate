@@ -17,6 +17,6 @@ export const getCall = async (url: string) => {
   }
 };
 
-export const roundOff = (number: number) => {
-  return number.toFixed(2);
+export const roundOff = (number?: number) => {
+  return number?.toFixed(2);
 };

@@ -6,16 +6,25 @@ import {COLORS, STRINGS} from '../../../helpers/constants';
 import {normalize, roundOff} from '../../../helpers/utils';
 import ExpandedView from './ExpandedView';
 import ic_arrow from '../../../assets/ic_arrow.webp';
+import {getCurrentValues} from '../utils/utils';
 
 type PropType = {
   item: HoldingItemType;
+  totalCurrentValue?: number;
+  totalInvestment?: number;
+  totalPnL?: number;
+  todayPnL?: number;
 };
 
-const PortfolioItem: React.FC<PropType> = ({item}) => {
+const PortfolioItem: React.FC<PropType> = ({
+  item,
+  totalCurrentValue,
+  totalInvestment,
+  totalPnL,
+  todayPnL,
+}) => {
   const [expanded, setExpanded] = useState(false);
-  const currentValue = item.ltp * item.quantity;
-  const investmentValue = item.avgPrice * item.quantity;
-  const profitAndLoss = currentValue - investmentValue;
+  const {currentValue, investmentValue, profitAndLoss} = getCurrentValues(item);
 
   function changeExpandedState() {
     setExpanded(state => !state);
@@ -65,6 +74,10 @@ const PortfolioItem: React.FC<PropType> = ({item}) => {
           currentValue={currentValue}
           investmentValue={investmentValue}
           profitAndLoss={profitAndLoss}
+          totalCurrentValue={totalCurrentValue}
+          totalInvestment={totalInvestment}
+          totalPnL={totalPnL}
+          todayPnL={todayPnL}
         />
       )}
     </View>

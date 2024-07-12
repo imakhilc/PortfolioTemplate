@@ -8,8 +8,11 @@ export const STRINGS = {
   pAndL: 'P/L',
   currentV: 'Current Value',
   invValue: 'Investment value',
-  todayPAndLoss: "Today's Profit & Loss",
   pAndLoss: 'Profit & Loss',
+  totalInv: 'Total Investment',
+  totalcurrent: 'Total Current Value',
+  totalPnL: 'Total Profit & Loss',
+  todayPAndLoss: "Today's Profit & Loss",
   wrong: 'Something Went Wrong!',
   tryAgain: 'Try Again',
 };
