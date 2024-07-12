@@ -13,14 +13,14 @@ import CustomText from '../../../components/CustomText';
 type PropType = {
   expanded: boolean;
   currentValue: number;
-  totalInvestment: number;
+  investmentValue: number;
   profitAndLoss: number;
 };
 
 const ExpandedView: React.FC<PropType> = ({
   expanded,
   currentValue,
-  totalInvestment,
+  investmentValue,
   profitAndLoss,
 }) => {
   const [height, setHeight] = useState(0);
@@ -59,8 +59,7 @@ const ExpandedView: React.FC<PropType> = ({
     <Animated.View style={[{height: viewHeight}]}>
       <View onLayout={onLayout} style={styles.expandedContainer}>
         {infoItem(STRINGS.currentV, currentValue)}
-        {infoItem(STRINGS.totalInv, totalInvestment)}
-        {/* {infoItem(STRINGS.todayPAndLoss)} */}
+        {infoItem(STRINGS.invValue, investmentValue)}
         {infoItem(STRINGS.pAndLoss, profitAndLoss)}
       </View>
     </Animated.View>

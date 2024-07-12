@@ -7,7 +7,7 @@ export const STRINGS = {
   ltp: 'LTP',
   pAndL: 'P/L',
   currentV: 'Current Value',
-  totalInv: 'Total Investment',
+  invValue: 'Investment value',
   todayPAndLoss: "Today's Profit & Loss",
   pAndLoss: 'Profit & Loss',
   wrong: 'Something Went Wrong!',

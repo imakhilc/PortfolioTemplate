@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {HoldingItemType} from '../utils/types';
 import CustomText from '../../../components/CustomText';
 import {COLORS, STRINGS} from '../../../helpers/constants';
 import {normalize, roundOff} from '../../../helpers/utils';
 import ExpandedView from './ExpandedView';
+import ic_arrow from '../../../assets/ic_arrow.webp';
 
 type PropType = {
   item: HoldingItemType;
@@ -27,22 +28,34 @@ const PortfolioItem: React.FC<PropType> = ({item}) => {
         activeOpacity={1}
         key={item.symbol}
         style={styles.buttonContainer}>
-        <View style={styles.row}>
-          <CustomText weight={'bold'} size={'medium'} text={item.symbol} />
-          <CustomText
-            weight={'regular'}
-            size={'small'}
-            text={`${STRINGS.ltp}: ${STRINGS.rupee}${item.ltp}`}
-          />
-        </View>
-        <View style={styles.row}>
-          <CustomText weight={'regular'} size={'small'} text={item.quantity} />
-          <CustomText
-            weight={'regular'}
-            size={'small'}
-            text={`${STRINGS.pAndL}: ${STRINGS.rupee}${roundOff(
-              profitAndLoss,
-            )}`}
+        <View style={styles.rowWithArrow}>
+          <View style={styles.flex1}>
+            <View style={styles.row}>
+              <CustomText weight={'bold'} size={'medium'} text={item.symbol} />
+              <CustomText
+                weight={'regular'}
+                size={'small'}
+                text={`${STRINGS.ltp}: ${STRINGS.rupee}${item.ltp}`}
+              />
+            </View>
+            <View style={styles.row}>
+              <CustomText
+                weight={'regular'}
+                size={'small'}
+                text={item.quantity}
+              />
+              <CustomText
+                weight={'regular'}
+                size={'small'}
+                text={`${STRINGS.pAndL}: ${STRINGS.rupee}${roundOff(
+                  profitAndLoss,
+                )}`}
+              />
+            </View>
+          </View>
+          <Image
+            source={ic_arrow}
+            style={[styles.arrow, expanded && styles.rotatedArrow]}
           />
         </View>
       </TouchableOpacity>
@@ -50,7 +63,7 @@ const PortfolioItem: React.FC<PropType> = ({item}) => {
         <ExpandedView
           expanded={expanded}
           currentValue={currentValue}
-          totalInvestment={investmentValue}
+          investmentValue={investmentValue}
           profitAndLoss={profitAndLoss}
         />
       )}
@@ -71,4 +84,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: normalize(12),
   },
+  rowWithArrow: {
+    flexDirection: 'row',
+  },
+  arrow: {
+    height: normalize(24),
+    width: normalize(24),
+    tintColor: 'white',
+    marginVertical: normalize(16),
+    marginLeft: normalize(12),
+    alignSelf: 'center',
+  },
+  rotatedArrow: {
+    transform: [{rotate: '180deg'}],
+  },
+  flex1: {flex: 1},
 });

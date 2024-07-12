@@ -9,7 +9,7 @@ import {
 import CustomText from './CustomText';
 import ic_error from '../assets/ic_error.webp';
 import {normalize} from '../helpers/utils';
-import { COLORS } from '../helpers/constants';
+import {COLORS} from '../helpers/constants';
 
 type PropType = {
   title: string;
