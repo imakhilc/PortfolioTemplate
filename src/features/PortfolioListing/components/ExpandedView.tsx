@@ -29,7 +29,7 @@ const ExpandedView: React.FC<PropType> = ({
     const toValue = expanded ? normalize(116) : 0;
     Animated.timing(viewHeight, {
       toValue,
-      duration: 100,
+      duration: 200,
       easing: Easing.linear,
       useNativeDriver: false,
     }).start();
