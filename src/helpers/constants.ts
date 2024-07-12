@@ -10,6 +10,8 @@ export const STRINGS = {
   totalInv: 'Total Investment',
   todayPAndLoss: "Today's Profit & Loss",
   pAndLoss: 'Profit & Loss',
+  wrong: 'Something Went Wrong!',
+  tryAgain: 'Try Again',
 };
 
 export const FONT_SIZE: {[key in SizeType]: number} = {

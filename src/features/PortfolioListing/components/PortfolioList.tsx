@@ -6,15 +6,19 @@ import {normalize} from '../../../helpers/utils';
 import {COLORS} from '../../../helpers/constants';
 
 type PropType = {
+  loading: boolean;
   data: PortfolioDataType;
+  initApiCall: () => void;
 };
 
-const PortfolioList: React.FC<PropType> = ({data}) => {
+const PortfolioList: React.FC<PropType> = ({loading, data, initApiCall}) => {
   const list = data.response?.userHolding;
   return (
     <View style={styles.container}>
       <FlatList
         data={list}
+        refreshing={loading}
+        onRefresh={initApiCall}
         contentContainerStyle={styles.contentContainerStyle}
         keyExtractor={item => item.symbol}
         renderItem={({item}) => <PortfolioItem item={item} />}
@@ -32,8 +36,7 @@ const styles = StyleSheet.create({
   separator: {
     height: normalize(1),
     backgroundColor: COLORS.primaryDark,
-    marginHorizontal: normalize(16),
-    marginBottom: normalize(12),
+    marginHorizontal: normalize(16)
   },
   contentContainerStyle: {
     paddingTop: normalize(16),

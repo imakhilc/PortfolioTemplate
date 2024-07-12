@@ -24,7 +24,7 @@ const PortfolioItem: React.FC<PropType> = ({item}) => {
     <View>
       <TouchableOpacity
         onPress={changeExpandedState}
-        activeOpacity={0.6}
+        activeOpacity={1}
         key={item.symbol}
         style={styles.buttonContainer}>
         <View style={styles.row}>
@@ -48,6 +48,7 @@ const PortfolioItem: React.FC<PropType> = ({item}) => {
       </TouchableOpacity>
       {expanded && (
         <ExpandedView
+          expanded={expanded}
           currentValue={currentValue}
           totalInvestment={investmentValue}
           profitAndLoss={profitAndLoss}
@@ -61,7 +62,9 @@ export default PortfolioItem;
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    backgroundColor: COLORS.dark,
     paddingHorizontal: normalize(16),
+    paddingTop: normalize(8),
   },
   row: {
     flexDirection: 'row',
